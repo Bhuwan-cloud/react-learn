@@ -18,12 +18,34 @@ export default function TextForm(props) {
         setText(newText)
     }
 
+    const handleExtraSpaces = () =>{
+        let newstring = text.split(/[ ]+/);
+        setText(newstring.join(" "))
+    }
+
     // const handleEmailExtract = () => {
     //     var regex = /<(.*)>/g;
     //     let  etext = regex.exec(text);
     //     console.log(etext);
 
     // }
+
+    const handleCopy = () => {
+        var text = document.getElementById('myBox');
+        text.select();
+        navigator.clipboard.writeText(text.value)
+    }
+
+    const handleFirstLetterCap = ()=>{
+        
+        const arr = text.split(" ");
+        for ( var i= 0; i < arr.length; i++){
+            arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+        }
+        const newStr = arr.join(" ");
+        setText(newStr);
+  
+    }
 
 
     const handleOnChange = (event) => {
@@ -47,6 +69,9 @@ export default function TextForm(props) {
             <button className="btn btn-primary mx-2 my-2" onClick={handleLowClick}>Convert to Lower Case  </button>
             <button className="btn btn-danger mx-2 my-2" onClick={handleClearClick}>Clear Text  </button>
             {/* <button className="btn btn-warning mx-2 my-2" onClick={handleEmailExtract}> Extract Email  </button> */}
+            <button className="btn btn-warning mx-2 my-2" onClick={handleCopy}>Copy Text  </button>
+            <button className="btn btn-success mx-2 my-2" onClick={handleExtraSpaces}> Remove Extra Spaces  </button>
+            <button className="btn btn-success mx-2 my-2" onClick={handleFirstLetterCap}> First Letter Cap  </button>
            
            
         </div>
